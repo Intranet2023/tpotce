@@ -1,6 +1,9 @@
 from datetime import datetime
 import yaml
 
+# Requires PyYAML
+# Install with: pip install -r requirements.txt
+
 version = \
 """
  ____  [T-Pot]         _            ____        _ _     _
