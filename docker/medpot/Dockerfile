@@ -22,15 +22,20 @@ RUN mkdir -p /usr/local/go/src/medpot && \
     cp dist/etc/ews.cfg /etc/ && \
     go build medpot
 #
-FROM scratch
+FROM alpine:3.20
+RUN apk --no-cache -U upgrade && \
+    apk --no-cache add python3 py3-psutil
 #
 # Setup medpot
 #
 COPY --from=builder /usr/local/go/src/medpot/medpot /opt/medpot/medpot
 COPY --from=builder /usr/local/go/src/medpot/template/*.xml /opt/medpot/
 COPY --from=builder /usr/local/go/src/medpot/dist/etc/ews.cfg /etc/ews.cfg
+COPY dist/cpu_check.py /cpu_check.py
 #
 # Start medpot
 WORKDIR /opt/medpot
 USER 2000:2000
+STOPSIGNAL SIGINT
+HEALTHCHECK --interval=5m --timeout=30s --retries=3 CMD python3 /cpu_check.py $(pgrep -of medpot) 99
 CMD ["./medpot"]

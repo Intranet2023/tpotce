@@ -26,11 +26,14 @@ WORKDIR /opt/ciscoasa_honeypot
 RUN pyinstaller asa_server.py --add-data "./asa:./asa"
 #
 FROM alpine:3.20
-RUN apk --no-cache -U upgrade
+RUN apk --no-cache -U upgrade && \
+    apk --no-cache add python3 py3-psutil
 COPY --from=builder /opt/ciscoasa_honeypot/dist/ /opt/
+COPY dist/cpu_check.py /cpu_check.py
 #
 # Start ciscoasa
 STOPSIGNAL SIGINT
+HEALTHCHECK --interval=5m --timeout=30s --retries=3 CMD python3 /cpu_check.py $(pgrep -of asa_server) 99
 WORKDIR /opt/asa_server/
 USER 2000:2000
 CMD ./asa_server --ike-port 5000 --enable_ssl --port 8443 --verbose >> /var/log/ciscoasa/ciscoasa.log 2>&1

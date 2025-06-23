@@ -107,7 +107,7 @@ services:
      - CONPOT_CONFIG=/etc/conpot/conpot.cfg
      - CONPOT_JSON_LOG=/var/log/conpot/conpot_IEC104.json
      - CONPOT_LOG=/var/log/conpot/conpot_IEC104.log
-     - CONPOT_TEMPLATE=IEC104
+     - CONPOT_TEMPLATE=${CONPOT_TEMPLATE_IEC104}
      - CONPOT_TMP=/tmp/conpot
     tmpfs:
      - /tmp/conpot:uid=2000,gid=2000
@@ -133,7 +133,7 @@ services:
      - CONPOT_CONFIG=/etc/conpot/conpot.cfg
      - CONPOT_JSON_LOG=/var/log/conpot/conpot_guardian_ast.json
      - CONPOT_LOG=/var/log/conpot/conpot_guardian_ast.log
-     - CONPOT_TEMPLATE=guardian_ast
+     - CONPOT_TEMPLATE=${CONPOT_TEMPLATE_GUARDIAN_AST}
      - CONPOT_TMP=/tmp/conpot
     tmpfs:
      - /tmp/conpot:uid=2000,gid=2000
@@ -158,7 +158,7 @@ services:
      - CONPOT_CONFIG=/etc/conpot/conpot.cfg
      - CONPOT_JSON_LOG=/var/log/conpot/conpot_ipmi.json
      - CONPOT_LOG=/var/log/conpot/conpot_ipmi.log
-     - CONPOT_TEMPLATE=ipmi
+     - CONPOT_TEMPLATE=${CONPOT_TEMPLATE_IPMI}
      - CONPOT_TMP=/tmp/conpot
     tmpfs:
      - /tmp/conpot:uid=2000,gid=2000
@@ -183,7 +183,7 @@ services:
      - CONPOT_CONFIG=/etc/conpot/conpot.cfg
      - CONPOT_JSON_LOG=/var/log/conpot/conpot_kamstrup_382.json
      - CONPOT_LOG=/var/log/conpot/conpot_kamstrup_382.log
-     - CONPOT_TEMPLATE=kamstrup_382
+     - CONPOT_TEMPLATE=${CONPOT_TEMPLATE_KAMSTRUP_382}
      - CONPOT_TMP=/tmp/conpot
     tmpfs:
      - /tmp/conpot:uid=2000,gid=2000
