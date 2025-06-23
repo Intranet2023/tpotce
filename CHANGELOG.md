@@ -23,6 +23,9 @@ T-Pot 24.04.1 brings significant updates and exciting new honeypot additions, es
 * Docker images now use **Alpine 3.20** or **Scratch** wherever possible.
 * Updates for `24.04.1` images will be provided continuously through Docker image updates.
 * **Ddospot** has been moved from the Hive / Sensor installation to the Tarpit installation.
+* Added CPU-based health checks to CiscoASA, CitrixHoneypot, Dicompot, Medpot, IPPhoney and Miniprint containers.
+* Conpot templates can now be configured via `.env` using `CONPOT_TEMPLATE_*` variables.
+* Added documentation for IoT/ICS/OT honeypots.
 
 ## Breaking Changes  
 ### NGINX  

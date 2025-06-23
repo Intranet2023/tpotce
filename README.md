@@ -141,6 +141,15 @@ T-Pot's main components have been moved into the `tpotinit` Docker image allowin
 [tanner](http://mushmush.org/),
 [wordpot](https://github.com/gbrindisi/wordpot)
 
+### IoT/ICS/OT Honeypots
+The following honeypots focus on industrial control systems and IoT devices:
+- **Conpot** emulates common ICS protocols and devices. Port and template settings can be adjusted via the `CONPOT_TEMPLATE_*` variables in `.env`.
+- **Medpot** simulates a medical equipment web service on port 80.
+- **Dicompot** provides a DICOM server for medical imaging devices.
+- **Miniprint** mimics a network printer with web management on port 8080.
+- **IPPhoney** exposes a basic IPP printing service over HTTP.
+
+
 Alongside the following tools:
 * [Autoheal](https://github.com/willfarrell/docker-autoheal) a tool to automatically restart containers with failed healthchecks.
 * [Cyberchef](https://gchq.github.io/CyberChef/) a web app for encryption, encoding, compression and data analysis.
@@ -585,7 +594,8 @@ On the T-Pot Landing Page just click on `Spiderfoot` and you will be forwarded t
 
 ## T-Pot Config File
 T-Pot offers a configuration file providing variables not only for the docker services (i.e. honeypots and tools) but also for the docker compose environment. The configuration file is hidden in `~/tpoce/.env`. There is also an example file (`env.example`) which holds the default configuration.<br>
-Before the first start run `~/tpotce/genuser.sh` or setup the `WEB_USER` manually as described [here](#add-users-to-nginx-t-pot-webui). 
+Conpot templates can be switched by adjusting the `CONPOT_TEMPLATE_*` variables in this file.
+Before the first start run `~/tpotce/genuser.sh` or setup the `WEB_USER` manually as described [here](#add-users-to-nginx-t-pot-webui).
 
 ## Customize T-Pot Honeypots and Services
 

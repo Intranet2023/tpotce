@@ -46,13 +46,16 @@ RUN pyinstaller ipphoney.py \
 		--hidden-import output_plugins.jsonlog
 #
 FROM alpine:3.20
-RUN apk --no-cache -U upgrade
+RUN apk --no-cache -U upgrade && \
+    apk --no-cache add python3 py3-psutil
 COPY --from=builder /opt/ipphoney/dist/ /opt/
 COPY --from=builder /opt/ipphoney/responses/ /opt/ipphoney/responses/
 COPY dist/honeypot.cfg /opt/ipphoney/etc/
+COPY dist/cpu_check.py /cpu_check.py
 #
 # Start ipphoney
 STOPSIGNAL SIGINT
+HEALTHCHECK --interval=5m --timeout=30s --retries=3 CMD python3 /cpu_check.py $(pgrep -of ipphoney) 99
 USER 2000:2000
 WORKDIR /opt/ipphoney/
 CMD ["./ipphoney"]
