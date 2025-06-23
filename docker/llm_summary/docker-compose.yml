@@ -1,0 +1,17 @@
+networks:
+  llm_summary_local:
+
+services:
+  llm_summary:
+    build: .
+    container_name: llm_summary
+    restart: always
+    networks:
+      - llm_summary_local
+    ports:
+      - "127.0.0.1:65432:8000"
+    environment:
+      LLM_PROVIDER: "ollama"
+      LLM_SERVER_URL: "http://ollama.local:11434"
+      LLM_MODEL: "llama3.1"
+    image: "dtagdevsec/llm_summary:24.04"

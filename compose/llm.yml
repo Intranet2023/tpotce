@@ -348,3 +348,23 @@ services:
     pull_policy: ${TPOT_PULL_POLICY}
     volumes:
      - ${TPOT_DATA_PATH}/spiderfoot:/home/spiderfoot/.spiderfoot
+
+# LLM Summary service
+  llm_summary:
+    container_name: llm_summary
+    restart: always
+    depends_on:
+      map_data:
+        condition: service_started
+    networks:
+     - nginx_local
+    ports:
+     - "127.0.0.1:65432:8000"
+    image: ${TPOT_REPO}/llm_summary:${TPOT_VERSION}
+    pull_policy: ${TPOT_PULL_POLICY}
+    environment:
+      LLM_PROVIDER: ${LLM_SUMMARY_PROVIDER}
+      LLM_SERVER_URL: ${LLM_SUMMARY_SERVER_URL}
+      LLM_MODEL: ${LLM_SUMMARY_MODEL}
+      LLM_API_KEY: ${LLM_SUMMARY_API_KEY}
+      MAP_DATA_URL: http://map_data:64299
