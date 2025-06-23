@@ -57,6 +57,7 @@ env bash -c "$(curl -sL https://github.com/telekom-security/tpotce/raw/master/in
   - [Kibana Dashboard](#kibana-dashboard)
   - [Attack Map](#attack-map)
   - [Cyberchef](#cyberchef)
+  - [LLM Summary](#llm-summary)
   - [Elasticvue](#elasticvue)
   - [Spiderfoot](#spiderfoot)
 - [Configuration](#configuration)
@@ -187,6 +188,7 @@ T-Pot offers a number of services which are basically divided into five groups:
     * Elasticvue a web front end for browsing and interacting with an Elasticsearch cluster.
     * T-Pot Attack Map a beautifully animated attack map for T-Pot.
     * Spiderfoot an open source intelligence automation tool.
+    * LLM Summary provides a short textual overview of recent honeypot attacks.
 4. Honeypots
     * A selection of the 23 available honeypots based on the selected `docker-compose.yml`.
 5. Network Security Monitoring (NSM)
@@ -206,6 +208,7 @@ During the installation and during the usage of T-Pot there are two different ty
 | Elasticvue       | BasicAuth    | `<WEB_USER>`     | `<web_user>` you chose during the installation of T-Pot.           |
 | Geoip Attack Map | BasicAuth    | `<WEB_USER>`     | `<web_user>` you chose during the installation of T-Pot.           |
 | Spiderfoot       | BasicAuth    | `<WEB_USER>`     | `<web_user>` you chose during the installation of T-Pot.           |
+| LLM Summary     | BasicAuth    | `<WEB_USER>`     | `<web_user>` you chose during the installation of T-Pot.           |
 | T-Pot            | OS           | `tpot`           | `tpot` this user / group is always reserved by the T-Pot services. |
 | T-Pot Logs       | BasicAuth    | `<LS_WEB_USER>`  | `LS_WEB_USER` are automatically managed.                           |
 
@@ -571,6 +574,11 @@ On the T-Pot Landing Page just click on `Attack Map` and you will be forwarded t
 
 ![AttackMap](doc/attackmap.png)
 <br><br>
+## LLM Summary
+On the T-Pot Landing Page click on `LLM Summary` to retrieve a two-paragraph digest of recent honeypot activity.
+This feature requires the LLM honeypots and a working Ollama or ChatGPT setup.
+
+<br><br>
 
 ## Cyberchef
 On the T-Pot Landing Page just click on `Cyberchef` and you will be forwarded to Cyberchef.
@@ -612,6 +620,8 @@ tarpit.yml
 tpot_services.yml
 ```
 The `.yml` files are docker compose files, each representing a different set of honeypots and tools with `tpot_services.yml` being a template for `customizer.py` to create a customized docker compose file.<br><br>
+The `llm.yml` compose file also contains the optional LLM summary service. Ensure your Ollama or ChatGPT credentials are set in `~/tpotce/.env` before enabling it.
+
 To activate a compose file follow these steps:
 1. Stop T-Pot with `systemctl stop tpot`.
 2. Copy the docker compose file `cp ~/tpotce/compose/<dockercompose.yml> ~/tpotce/docker-compose.yml`.
